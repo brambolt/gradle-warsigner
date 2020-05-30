@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Codebase: *
+
+Name: Brambolt
+Build-Date: 2019-04-07 11:47:28
+Build-Number: SNAPSHOT
+Product-Version: 2019.04.17-SNAPSHOT
+

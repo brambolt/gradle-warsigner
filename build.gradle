@@ -1,0 +1,65 @@
+
+plugins {
+  id 'com.brambolt.gradle.pluginbuild' version '2020.05.25-4031' apply false
+  id 'com.brambolt.gradle.testkit' version 'SNAPSHOT' apply false
+}
+
+description = 'Utilities for working with webstart WAR files.'
+group = 'com.brambolt.gradle'
+
+ext {
+  artifactId = 'brambolt-gradle-warsigner'
+  developers = [[
+    email: 'stefan.sigurdsson@brambolt.com',
+    id: 'stefan.sigurdsson@brambolt.com',
+    name: 'Stefán Sigurðsson'
+  ]]
+  inceptionYear = '2017'
+  licenses = [[
+    id: 'Apache-2.0',
+    name: 'The Apache Software License, Version 2.0',
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+  ]]
+  pluginClass = 'com.brambolt.gradle.WarsignerPlugin'
+  pluginDisplayName = 'Brambolt Warsigner plugin'
+  pluginId = 'com.brambolt.gradle.warsigner'
+  pluginTags = ['webstart', 'jarsigner', 'war', 'warsigner']
+  pluginWebsite = 'https://github.com/brambolt/gradle-warsigner'
+  projectVersion = '2020.05.25'
+  vcsUrl = 'https://github.com/brambolt/gradle-warsigner'
+}
+
+apply plugin: 'com.brambolt.gradle.pluginbuild'
+apply plugin: 'com.brambolt.gradle.testkit'
+
+dependencies {
+  implementation 'com.brambolt:brambolt-rt:SNAPSHOT'
+  testImplementation 'com.brambolt.gradle:brambolt-gradle-testkit:SNAPSHOT'
+}
+
+File gradleWrapperJar = new File(project.projectDir, 'gradle/wrapper/gradle-wrapper.jar')
+
+task createJarFixture(type: Copy) {
+  from gradleWrapperJar
+  into "${project.buildDir}/resources/test"
+}
+
+task createWarFixture {
+  File tmpDir = new File(project.buildDir, 'tmp/createWarFixture')
+  File destFile = new File(project.buildDir, 'resources/test/fixture.war')
+  doFirst {
+    File applicationJarsDir = new File(tmpDir, 'application-jars')
+    applicationJarsDir.mkdirs()
+    ant.copy(file: gradleWrapperJar, todir: applicationJarsDir)
+    ant.zip(basedir: tmpDir, destfile: destFile)
+  }
+}
+
+processTestResources.dependsOn(['createJarFixture', 'createWarFixture'])
+
+test {
+  testLogging {
+    outputs.upToDateWhen { false }
+    showStandardStreams = true
+  }
+}
