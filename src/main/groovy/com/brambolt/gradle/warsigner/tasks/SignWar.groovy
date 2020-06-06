@@ -10,7 +10,7 @@ import org.gradle.api.tasks.TaskAction
 import java.nio.file.Path
 
 import static com.brambolt.nio.file.ZipFileSystems.unzip
-import static com.brambolt.gradle.SpecObjects.getFile
+import static com.brambolt.gradle.SpecObjects.asFile
 
 /**
  * <p>Signs a WAR file. This task can remove existing signing data and add jar
@@ -102,7 +102,7 @@ class SignWar extends SigningTask {
     if (null == signer)
       signer = new SignWithJarsigner(
         signatureFileNamePrefix,
-        getFile(signingStore),
+        asFile(signingStore),
         signingStorePassword,
         signingAlias,
         signingKeyPassword)
@@ -138,7 +138,7 @@ class SignWar extends SigningTask {
     // the remaining configuration parameters:
     checkConfiguration()
     // Clean signing data, set permissions and resign each application jar:
-    File warFile = getFile(war)
+    File warFile = asFile(war)
     Path tmpDir = Files.createTempDirectory(warFile.getName())
     ant.unzip(src: warFile, dest: tmpDir)
     apply(tmpDir.toFile())

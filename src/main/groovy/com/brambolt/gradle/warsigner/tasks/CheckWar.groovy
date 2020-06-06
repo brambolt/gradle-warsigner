@@ -5,7 +5,7 @@ import org.gradle.api.GradleException
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskAction
 
-import static com.brambolt.gradle.SpecObjects.getFile
+import static com.brambolt.gradle.SpecObjects.asFile
 
 
 /**
@@ -57,7 +57,7 @@ class CheckWar extends DefaultTask {
   void apply() {
     com.brambolt.util.jar.CheckWar check =
       new com.brambolt.util.jar.CheckWar(signatureFileNamePrefix, attributes)
-    File warFile = getFile(war)
+    File warFile = asFile(war)
     check.apply(warFile)
     logger.info("Successfully checked signing data and manifest attributes in ${warFile}")
   }

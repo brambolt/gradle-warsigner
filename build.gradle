@@ -1,7 +1,7 @@
 
 plugins {
-  id 'com.brambolt.gradle.pluginbuild' version '2020.05.25-4031' apply false
-  id 'com.brambolt.gradle.testkit' version 'SNAPSHOT' apply false
+  id 'com.brambolt.gradle.pluginbuild' apply false
+  id 'com.brambolt.gradle.testkit' apply false
 }
 
 description = 'Utilities for working with webstart WAR files.'
@@ -25,7 +25,7 @@ ext {
   pluginId = 'com.brambolt.gradle.warsigner'
   pluginTags = ['webstart', 'jarsigner', 'war', 'warsigner']
   pluginWebsite = 'https://github.com/brambolt/gradle-warsigner'
-  projectVersion = '2020.05.25'
+  projectVersion = bramboltProjectVersion
   vcsUrl = 'https://github.com/brambolt/gradle-warsigner'
 }
 
@@ -33,8 +33,8 @@ apply plugin: 'com.brambolt.gradle.pluginbuild'
 apply plugin: 'com.brambolt.gradle.testkit'
 
 dependencies {
-  implementation 'com.brambolt:brambolt-rt:SNAPSHOT'
-  testImplementation 'com.brambolt.gradle:brambolt-gradle-testkit:SNAPSHOT'
+  implementation "com.brambolt:brambolt-rt:${bramboltRtVersion}"
+  testImplementation "com.brambolt.gradle:brambolt-gradle-testkit:${bramboltTestkitVersion}"
 }
 
 File gradleWrapperJar = new File(project.projectDir, 'gradle/wrapper/gradle-wrapper.jar')

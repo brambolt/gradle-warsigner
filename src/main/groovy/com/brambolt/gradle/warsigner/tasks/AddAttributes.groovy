@@ -7,7 +7,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskAction
 
-import static com.brambolt.gradle.SpecObjects.getFile
+import static com.brambolt.gradle.SpecObjects.asFile
 import static com.brambolt.nio.file.ZipFileSystems.process
 
 /**
@@ -50,7 +50,7 @@ class AddAttributes extends DefaultTask {
   void apply() {
     if (null == attributes || attributes.isEmpty())
       return // Nothing to do
-    process(getFile(jar), "Unable to add attributes") {
+    process(asFile(jar), "Unable to add attributes") {
       FileSystem fs ->
         new com.brambolt.util.jar.AddAttributes(attributes).apply(fs) }
   }

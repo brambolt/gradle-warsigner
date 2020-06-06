@@ -5,7 +5,7 @@ import org.gradle.api.GradleException
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskAction
 
-import static com.brambolt.gradle.SpecObjects.getFile
+import static com.brambolt.gradle.SpecObjects.asFile
 
 /**
  * Sians a jar file.
@@ -47,11 +47,11 @@ class SignJar extends SigningTask {
   @TaskAction
   void apply() {
     checkConfiguration()
-    File jarFile = getFile(jar)
+    File jarFile = asFile(jar)
     project.logger.info("Signing ${jar.absolutePath}")
     new SignWithJarsigner(
       signatureFileNamePrefix,
-      getFile(signingStore),
+      asFile(signingStore),
       signingStorePassword,
       signingKeyPassword,
       signingAlias,

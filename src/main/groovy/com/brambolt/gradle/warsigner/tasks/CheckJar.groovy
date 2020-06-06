@@ -5,7 +5,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskAction
 
-import static com.brambolt.gradle.SpecObjects.getFile
+import static com.brambolt.gradle.SpecObjects.asFile
 import static com.brambolt.nio.file.ZipFileSystems.process
 
 /**
@@ -53,7 +53,7 @@ class CheckJar extends DefaultTask {
    */
   @TaskAction
   void apply() {
-    apply(getFile(jar))
+    apply(asFile(jar))
   }
 
   /**
