@@ -15,7 +15,7 @@
  */
 
 plugins {
-  id 'com.brambolt.gradle.pluginbuild' apply false
+  id 'com.brambolt.gradle.build.plugin' apply false
   id 'com.brambolt.gradle.testkit' apply false
 }
 
@@ -30,6 +30,7 @@ ext {
     name: 'Stefán Sigurðsson'
   ]]
   inceptionYear = '2017'
+  isOpenSource = true // Enables publishing to plugins.gradle.org and Bintray
   licenses = [[
     id: 'Apache-2.0',
     name: 'The Apache Software License, Version 2.0',
@@ -40,16 +41,17 @@ ext {
   pluginId = 'com.brambolt.gradle.warsigner'
   pluginTags = ['webstart', 'jarsigner', 'war', 'warsigner']
   pluginWebsite = 'https://github.com/brambolt/gradle-warsigner'
-  projectVersion = bramboltProjectVersion
+  release = bramboltRelease
   vcsUrl = 'https://github.com/brambolt/gradle-warsigner'
 }
 
-apply plugin: 'com.brambolt.gradle.pluginbuild'
+apply plugin: 'com.brambolt.gradle.build.plugin'
 apply plugin: 'com.brambolt.gradle.testkit'
 
 dependencies {
-  implementation "com.brambolt:brambolt-rt:${bramboltRtVersion}"
-  testImplementation "com.brambolt.gradle:brambolt-gradle-testkit:${bramboltTestkitVersion}"
+  implementation "com.brambolt:brambolt-rt:${version}"
+  implementation "com.brambolt.gradle:brambolt-gradle-rt:${version}"
+  testImplementation "com.brambolt.gradle:brambolt-gradle-testkit:${version}"
 }
 
 File gradleWrapperJar = new File(project.projectDir, 'gradle/wrapper/gradle-wrapper.jar')
