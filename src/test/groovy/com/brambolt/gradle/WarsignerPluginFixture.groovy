@@ -37,4 +37,16 @@ plugins {
 }
 """, testProjectDir)
   }
+
+  static applyAndSignWar(TemporaryFolder testProjectDir) {
+    createBuildFile('build-apply-sign-war.gradle', """
+plugins {
+  id 'com.brambolt.gradle.warsigner' 
+}
+
+import com.brambolt.gradle.warsigner.tasks.SignWar
+// Not ready - look at samples/simple to continue...
+
+""", testProjectDir)
+  }
 }

@@ -1,0 +1,27 @@
+
+plugins {
+  id 'application'
+  // This relies on the SNAPSHOT being built before the samples are run:
+  id 'com.brambolt.gradle.warsigner' version 'SNAPSHOT'
+}
+
+import com.brambolt.gradle.warsigner.tasks.SignWar
+
+task setup(type: Copy) {
+  doFirst {
+    project.buildDir.mkdirs()
+  }
+  // This relies on the project being built before the samples are run:
+  from new File(project.projectDir, '../../build/resources/test/fixture.war')
+  into project.buildDir
+}
+
+task signWar(type: SignWar, dependsOn: setup) {
+  signatureFileNamePrefix = 'WARSIGNER' // Not important
+  signingAlias = 'warsigner'
+  signingKeyPassword = 'warsigner'
+  signingStore = new File(project.projectDir, 'sample.keystore')
+  signingStorePassword = 'warsigner'
+  // This relies on the setup task, above:
+  war = new File(project.buildDir, 'fixture.war')
+}

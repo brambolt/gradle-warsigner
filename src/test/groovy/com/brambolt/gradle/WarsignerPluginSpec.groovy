@@ -32,7 +32,8 @@ class WarsignerPluginSpec extends Specification {
   def setup() {
     buildFiles = [
       applyFalse: WarsignerPluginFixture.applyFalse(testProjectDir),
-      applyOnly: WarsignerPluginFixture.applyOnly(testProjectDir)
+      applyOnly: WarsignerPluginFixture.applyOnly(testProjectDir),
+      applyAndSignWar: WarsignerPluginFixture.applyAndSignWar(testProjectDir)
     ]
   }
 
@@ -52,4 +53,14 @@ class WarsignerPluginSpec extends Specification {
     then:
     result.task(":tasks").outcome == SUCCESS
   }
+
+  /*
+  def 'can sign war'() {
+    when:
+    def result = runTask(testProjectDir.root,
+      '-b', buildFiles.applyAndSignWar.name as String, 'signWar')
+    then:
+    result.task(":signWar").outcome == SUCCESS
+  }
+   */
 }

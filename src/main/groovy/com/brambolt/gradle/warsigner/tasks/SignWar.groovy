@@ -34,7 +34,7 @@ import static com.brambolt.gradle.SpecObjects.asFile
  * signing the jars with the provided certificate.</p>
  *
  * <p>The most common use case is to sign WAR files before deployment to
- * production.</p>
+ * production, or resign in case of expired certificate.</p>
  *
  * <p>A second common use case is to resign webstart WAR files to ensure that
  * all jars are signed with the same certificate and at the same time make
@@ -91,13 +91,24 @@ class SignWar extends SigningTask {
     description = 'Repairs permissions and resigns jars in a WAR.'
     super.configure(closure)
     configureSigningParameters()
-    onlyIf { null != signingStore && !signingStore.isEmpty() }
+    onlyIf { shouldExecute() }
     configureDefaults()
     onlyIf { sign || unsign || (null != attributes && !attributes.isEmpty()) }
     doFirst {
-      project.logger.quiet('Granting permissions and resigning jars...')
+      if (unsign)
+        project.logger.quiet('Removing pre-existing signing data...')
+      if (!attributes.isEmpty())
+        project.logger.quiet('Granting permissions and resigning jars...')
+      if (sign)
+        project.logger.quiet('Signing jars...')
     }
     this
+  }
+
+  boolean shouldExecute() {
+    null != signingStore && (
+      (signingStore instanceof String && !signingStore.trim().isEmpty()) ||
+      (signingStore instanceof File))
   }
 
   /**
