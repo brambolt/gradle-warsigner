@@ -97,8 +97,10 @@ class SignWar extends SigningTask {
     doFirst {
       if (unsign)
         project.logger.quiet('Removing pre-existing signing data...')
-      if (!attributes.isEmpty())
+      if (!attributes.isEmpty()) {
         project.logger.quiet('Granting permissions and resigning jars...')
+        project.logger.info("Adding attributes:\n\t${attributes.join('\n\t')}")
+      }
       if (sign)
         project.logger.quiet('Signing jars...')
     }

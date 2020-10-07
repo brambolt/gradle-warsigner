@@ -102,9 +102,9 @@ abstract class SigningTask extends DefaultTask {
 
   protected void printConfiguration() {
     project.logger.info("Signing store: ${signingStore ?: 'null'}")
-    project.logger.info("Signing store password: ${signingStorePassword ?: 'null'}")
+    // project.logger.debug("Signing store password: ${signingStorePassword ?: 'null'}")
     project.logger.info("Signing alias: ${signingAlias ?: 'null'}")
-    project.logger.info("Signing key password: ${signingKeyPassword ?: 'null'}")
+    // project.logger.debug("Signing key password: ${signingKeyPassword ?: 'null'}")
   }
 
   /**
