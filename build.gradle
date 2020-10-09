@@ -80,3 +80,5 @@ test {
     showStandardStreams = true
   }
 }
+
+test.finalizedBy(':samples:runAll')

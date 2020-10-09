@@ -27,3 +27,5 @@ pluginManagement {
 }
 
 rootProject.name = 'gradle-warsigner'
+
+include 'samples'

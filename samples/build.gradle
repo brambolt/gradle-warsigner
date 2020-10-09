@@ -1,0 +1,15 @@
+
+task runSimple(type: GradleBuild) {
+  dir = new File(project.projectDir, 'simple')
+  tasks = ['signWar']
+}
+
+task runWebstart(type: GradleBuild) {
+  dir = new File(project.projectDir, 'webstart')
+  tasks = ['resignWebstart']
+}
+
+task runAll {
+  dependsOn(runSimple)
+  dependsOn(runWebstart)
+}
