@@ -26,6 +26,6 @@ pluginManagement {
   }
 }
 
-rootProject.name = 'gradle-warsigner'
+rootProject.name = 'brambolt-gradle-warsigner'
 
 include 'samples'
