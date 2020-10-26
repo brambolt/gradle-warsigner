@@ -16,9 +16,8 @@
 
 package com.brambolt.util.jar
 
-import org.junit.Rule
-
 import java.nio.file.FileSystem
+import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
