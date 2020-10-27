@@ -1,8 +1,7 @@
 
 plugins {
   id 'application'
-  // This relies on the SNAPSHOT being built before the samples are run:
-  id 'com.brambolt.gradle.warsigner' version 'SNAPSHOT'
+  id 'com.brambolt.gradle.warsigner'
 }
 
 import com.brambolt.gradle.warsigner.tasks.SignWar

@@ -4,6 +4,9 @@ pluginManagement {
     mavenLocal()
     mavenCentral()
   }
+  plugins {
+    id 'com.brambolt.gradle.warsigner' version bramboltVersion
+  }
 }
 
 rootProject.name = 'brambolt-gradle-warsigner-simple-sample'

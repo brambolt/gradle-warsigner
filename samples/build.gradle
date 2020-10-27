@@ -1,12 +1,12 @@
 
-task runSimple(type: GradleBuild) {
-  dir = new File(project.projectDir, 'simple')
-  tasks = ['signWar']
+task runSimple(type: Exec) {
+  workingDir = new File(project.projectDir, 'simple')
+  commandLine(['../../gradlew', 'signWar', '--no-daemon', "-PbramboltVersion=${bramboltVersion}"])
 }
 
-task runWebstart(type: GradleBuild) {
-  dir = new File(project.projectDir, 'webstart')
-  tasks = ['resignWebstart']
+task runWebstart(type: Exec) {
+  workingDir = new File(project.projectDir, 'webstart')
+  commandLine(['../../gradlew', 'resignWebstart', '--no-daemon', "-PbramboltVersion=${bramboltVersion}"])
 }
 
 task runAll {
